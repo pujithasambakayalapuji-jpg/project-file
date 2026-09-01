@@ -5,7 +5,16 @@ const userDB = mongoose.Schema({
         require:true
     },
     password:{
+        type:string,
+        require:true
+    },
+    email:{
         type:String,
         require:true
+    },
+    CreatedAt:{
+        type:Date,
+        default: Date.now
     }
 })
+ module.exports = mongoose.model("userdata",UserData)
