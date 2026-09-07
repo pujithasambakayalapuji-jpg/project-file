@@ -2,7 +2,23 @@ const express = require('express');
 const mongoose = require('mongoose');
 const UserData = require('./model');
 const app = express();
-mongoose.connect("mongodb://localhost:27017").then(() =>console.log("database connected")).catch((err) => console.log(err.message))
+app.use(express.json);
+mongoose.connect("mongodb://localhost:27017/userDB").then(() =>console.log("database connected")).catch((err) => console.log(err.message))
+app.post('/send', async (req,res) => {
 
+    const { username, email,password}=req.body;
+      try{
+        const Data = new UserData({
+        username,
+        email,
+        password
+        });
+        await UserData.save();
+        return res.json({"message":"Data sent successfully"});
+    }
+    catch (err){
+        console.log(err.message)
+    }
+})
 
 app.listen(3000, ()=> console.log("server is running...."))
