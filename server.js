@@ -19,6 +19,18 @@ app.post('/send', async (req,res) => {
     catch (err){
         console.log(err.message)
     }
+});
+app.get('/get_data',async(req,res)=>{
+    try{
+        const data = await UserData.find()
+        return res.json({
+            message :"getting data...",
+            userdata: data
+        })
+    }
+    catch(err){
+        console.log(err.message)
+    }
 })
 
 app.listen(3000, ()=> console.log("server is running...."))
